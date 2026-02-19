@@ -1,0 +1,109 @@
+﻿<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mapa Admin - SCDRI</title>
+
+  <link rel="stylesheet" href="/inicio/style.css" />
+  <link rel="stylesheet" href="./style.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;700&family=Nunito:wght@400;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="frutiger-bg"></div>
+
+  <nav class="glass-nav">
+    <div class="nav-logo" title="Sistema de Controle de Resíduos Industriais">SCDRI Admin</div>
+    <div class="nav-links">
+      <a href="/perfil/" class="nav-avatar" title="Perfil">
+        <img id="navAvatar" class="nav-avatar-img" alt="Perfil" />
+      </a>
+      <a href="/mapa_admin/" class="active">Mapa</a>
+      <a href="/admin/">Admin</a>
+      <a href="#" class="logout" onclick="logout()">Sair</a>
+    </div>
+  </nav>
+
+  <main class="content admin-map-content">
+    <section class="glass-panel admin-map-wrap">
+      <div class="map-head">
+        <h1>Mapa de Denúncias</h1>
+        <p>Visualização geral das denúncias com informações básicas.</p>
+      </div>
+      <div id="map"></div>
+    </section>
+  </main>
+
+  <div id="decisionModal" class="decision-modal" aria-hidden="true">
+    <div class="decision-card glass-panel" role="dialog" aria-modal="true" aria-labelledby="decisionTitle">
+      <h2 id="decisionTitle">Finalizar verificação</h2>
+      <p class="decision-subtitle">Escolha uma decisão para esta denúncia:</p>
+
+      <div class="decision-table-wrap">
+        <table class="decision-table">
+          <thead>
+            <tr>
+              <th>Opção</th>
+              <th>Descrição</th>
+              <th>Escolher</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Alta</td>
+              <td>Prioridade crítica</td>
+              <td>
+                <label class="decision-choice">
+                  <input type="radio" name="decisionOption" value="high" />
+                  <span>Selecionar</span>
+                </label>
+              </td>
+            </tr>
+            <tr>
+              <td>Média</td>
+              <td>Prioridade moderada</td>
+              <td>
+                <label class="decision-choice">
+                  <input type="radio" name="decisionOption" value="medium" />
+                  <span>Selecionar</span>
+                </label>
+              </td>
+            </tr>
+            <tr>
+              <td>Baixa</td>
+              <td>Prioridade baixa</td>
+              <td>
+                <label class="decision-choice">
+                  <input type="radio" name="decisionOption" value="low" />
+                  <span>Selecionar</span>
+                </label>
+              </td>
+            </tr>
+            <tr>
+              <td>Falsa</td>
+              <td>Marcar como denúncia falsa</td>
+              <td>
+                <label class="decision-choice">
+                  <input type="radio" name="decisionOption" value="false" />
+                  <span>Selecionar</span>
+                </label>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="decision-actions">
+        <button id="decisionConfirm" class="map-action-btn" type="button" disabled>Confirmar</button>
+        <button id="decisionCancel" class="decision-cancel-btn" type="button">Cancelar</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/theme.js"></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="./script.js" defer></script>
+</body>
+</html>
+

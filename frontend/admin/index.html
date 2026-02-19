@@ -1,0 +1,233 @@
+﻿<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Painel Admin - SCDRI</title>
+
+  <link rel="stylesheet" href="/inicio/style.css">
+  <link rel="stylesheet" href="./style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;700&family=Nunito:wght@400;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+  <div class="frutiger-bg"></div>
+
+  <nav class="glass-nav">
+    <div class="nav-logo" title="Sistema de Controle de Resíduos Industriais">SCDRI Admin</div>
+    <div class="nav-links">
+      <a href="/perfil/" class="nav-avatar" title="Perfil">
+        <img id="navAvatar" alt="Perfil" />
+      </a>
+      <a href="/mapa_admin/">Mapa</a>
+      <a href="/admin/" class="active">Admin</a>
+      <a href="#" class="logout" onclick="logout()">Sair</a>
+    </div>
+  </nav>
+
+  <main class="content">
+    <section class="glass-panel admin-hero">
+      <h1>Painel de Gestão</h1>
+      <p>Sistema de Controle de Resíduos Industriais: monitore denúncias, priorize ocorrências críticas e exporte relatórios oficiais.</p>
+    </section>
+
+    <section class="glass-panel admin-toolbar">
+      <div class="toolbar-left">
+        <label for="period">Período</label>
+        <select id="period" name="period">
+          <option value="daily">Diário</option>
+          <option value="weekly">Semanal</option>
+          <option value="monthly" selected>Mensal</option>
+          <option value="annual">Anual</option>
+        </select>
+      </div>
+
+      <button id="btnPdf" class="pdf-btn-pro" title="Exportar relatório em PDF" aria-label="Exportar relatório em PDF">
+        <span class="pdf-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24">
+            <path d="M6 2h9l5 5v15a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zm8 1.5V8h4.5"/>
+          </svg>
+        </span>
+        <span class="pdf-btn-text">Exportar PDF</span>
+      </button>
+    </section>
+
+    <div class="stats-row grid">
+      <div class="glass-panel stat-card">
+        <h3>Total</h3>
+        <p id="totalCount">0</p>
+      </div>
+      <div class="glass-panel stat-card">
+        <h3>Pendentes</h3>
+        <p id="pendingCount">0</p>
+      </div>
+      <div class="glass-panel stat-card">
+        <h3>Resolvidos</h3>
+        <p id="resolvedCount">0</p>
+      </div>
+      <div class="glass-panel stat-card">
+        <h3>Rejeitados</h3>
+        <p id="rejectedCount">0</p>
+      </div>
+    </div>
+
+    <section class="admin-grid">
+      <article class="glass-panel admin-card">
+        <h2>Insights rápidos</h2>
+        <ul class="insights-list">
+          <li>
+            <span class="insight-label">Ocorrências críticas abertas</span>
+            <span id="insightCriticalOpen" class="insight-value">0</span>
+          </li>
+          <li>
+            <span class="insight-label">Local mais recorrente</span>
+            <span id="insightTopLocation" class="insight-value">-</span>
+          </li>
+          <li>
+            <span class="insight-label">Última denúncia registrada</span>
+            <span id="insightLastReport" class="insight-value">-</span>
+          </li>
+        </ul>
+      </article>
+
+      <article class="glass-panel admin-card">
+        <h2>Checklist operacional</h2>
+        <ul class="admin-tips">
+          <li>Priorize denúncias com urgência alta antes das demais.</li>
+          <li>Registre motivo detalhado ao rejeitar para evitar retrabalho.</li>
+          <li>Exporte PDF ao fim do turno para histórico e auditoria.</li>
+        </ul>
+      </article>
+    </section>
+
+    <section class="admin-grid charts-grid">
+      <article class="glass-panel admin-card">
+        <h2>Estatísticas por categoria</h2>
+        <div class="chart-canvas-wrap">
+          <canvas id="chartCategory"></canvas>
+        </div>
+      </article>
+      <article class="glass-panel admin-card">
+        <div class="chart-head">
+          <h2>Estatísticas por região</h2>
+          <div class="region-slider-controls">
+            <button id="regionPrev" class="btn" type="button" aria-label="Mostrar regiões anteriores">&lt;</button>
+            <span id="regionPageInfo" class="muted small">1/1</span>
+            <button id="regionNext" class="btn" type="button" aria-label="Mostrar próximas regiões">&gt;</button>
+          </div>
+        </div>
+        <div class="chart-canvas-wrap">
+          <canvas id="chartRegion"></canvas>
+        </div>
+      </article>
+    </section>
+
+    <section class="admin-table glass-panel">
+      <div class="admin-table-head">
+        <h2>Gerenciar Denúncias</h2>
+        <span class="muted small">Atualize prioridade, marque denúncia falsa, rejeite ou exclua</span>
+      </div>
+
+      <div class="admin-filters-advanced glass-panel">
+        <div class="filter-grid">
+          <select id="filterUrgency" aria-label="Filtrar por prioridade">
+            <option value="">Prioridade (todas)</option>
+            <option value="null">Nulo</option>
+            <option value="high">Alta</option>
+            <option value="medium">Média</option>
+            <option value="low">Baixa</option>
+          </select>
+          <select id="filterStatus" aria-label="Filtrar por status">
+            <option value="">Status (todos)</option>
+            <option value="open">Pendente</option>
+            <option value="verifying">Verificando</option>
+            <option value="in_progress">Em progresso</option>
+            <option value="resolved">Limpo</option>
+            <option value="rejected">Rejeitado</option>
+          </select>
+          <select id="filterCategory" aria-label="Filtrar por categoria">
+            <option value="">Categoria (todas)</option>
+            <option value="entulho">Entulho</option>
+            <option value="domestico">Doméstico</option>
+            <option value="industrial">Industrial</option>
+          </select>
+          <input id="filterAuthor" type="text" placeholder="Autor (nome)" aria-label="Filtrar por autor" />
+          <input id="filterLocation" type="text" placeholder="Local" aria-label="Filtrar por local" />
+        </div>
+        <div class="filter-actions">
+          <button id="btnApplyFilters" class="btn" type="button">Pesquisar</button>
+          <button id="btnClearFilters" class="btn" type="button">Limpar filtros</button>
+        </div>
+      </div>
+
+      <div class="table-wrap manage-reports-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Usuário:</th>
+              <th>Título</th>
+              <th>Categoria</th>
+              <th>Local</th>
+              <th>Urgência</th>
+              <th>Status</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody id="adminTableBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="admin-table glass-panel" style="margin-top:16px;">
+      <div class="admin-table-head">
+        <h2>Usuários</h2>
+        <span class="muted small">RF09: banir/desbanir usuários indevidos</span>
+      </div>
+
+      <div class="admin-filters-advanced glass-panel user-filters-panel">
+        <div class="filter-grid users-filter-grid">
+          <input id="userFilterName" type="text" placeholder="Pesquisar por nome" aria-label="Pesquisar por nome" />
+          <select id="userFilterStatus" aria-label="Filtrar por status do usuário">
+            <option value="">Status (todos)</option>
+            <option value="active">Ativo</option>
+            <option value="banned">Banido</option>
+          </select>
+          <select id="userFilterFalseSort" aria-label="Ordenar por denúncias falsas">
+            <option value="normal">Ordem normal (criação)</option>
+            <option value="false_desc">Denúncias falsas (decrescente)</option>
+            <option value="false_asc">Denúncias falsas (crescente)</option>
+          </select>
+        </div>
+        <div class="filter-actions">
+          <button id="btnApplyUserFilters" class="btn" type="button">Pesquisar</button>
+          <button id="btnClearUserFilters" class="btn" type="button">Limpar filtros</button>
+        </div>
+      </div>
+
+      <div class="table-wrap users-table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nome</th>
+              <th>CPF</th>
+              <th>Denúncias Falsas</th>
+              <th>Qtd. Banimentos</th>
+              <th>Status</th>
+              <th>Motivo</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody id="usersTableBody"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js" defer></script>
+  <script src="/theme.js"></script>
+</body>
+</html>
+

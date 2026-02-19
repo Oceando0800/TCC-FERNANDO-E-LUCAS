@@ -1,0 +1,107 @@
+﻿@import "../login/style.css";
+
+.rules-required {
+  margin: 8px 0 14px;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--panel) 88%, transparent);
+}
+
+.rules-indicator {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  background: transparent;
+  border: 0;
+  color: inherit;
+  cursor: pointer;
+  text-align: left;
+  font: inherit;
+  padding: 0;
+}
+
+.rules-indicator span:last-child {
+  flex: 1;
+  color: #4c7dff;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  font-weight: 700;
+}
+
+.rules-indicator:hover span:last-child {
+  color: #6b95ff;
+}
+
+.rules-indicator-icon {
+  order: 2;
+  margin-left: 10px;
+  width: 20px;
+  height: 20px;
+  border: 2px solid color-mix(in srgb, var(--text) 35%, var(--line));
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: color-mix(in srgb, var(--panel) 80%, #000 20%);
+  flex: 0 0 auto;
+}
+
+.rules-required.is-accepted .rules-indicator-icon {
+  background: var(--accent);
+  border-color: color-mix(in srgb, var(--accent) 70%, #0f3a3f 30%);
+}
+
+.rules-help {
+  display: block;
+  margin-top: 6px;
+  opacity: 0.85;
+}
+
+.rules-modal {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: rgba(5, 8, 14, 0.55);
+  z-index: 9999;
+  padding: 16px;
+}
+
+.rules-modal.is-open {
+  display: flex;
+}
+
+.rules-modal-card {
+  width: min(760px, 100%);
+  max-height: 88vh;
+  overflow: auto;
+  padding: 18px;
+}
+
+.rules-list {
+  margin: 12px 0;
+  padding-left: 22px;
+  display: grid;
+  gap: 8px;
+}
+
+.rules-confirm {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.rules-confirm input {
+  margin-top: 2px;
+}
+
+.rules-actions {
+  margin-top: 14px;
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+}

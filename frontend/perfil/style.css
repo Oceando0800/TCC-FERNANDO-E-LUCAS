@@ -1,0 +1,150 @@
+﻿@import url("/inicio/style.css");
+
+.profile-top {
+  padding: 18px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 22px;
+  align-items: start;
+}
+
+.profile-title {
+  margin: 0;
+  font-family: 'Comfortaa', system-ui, sans-serif;
+}
+
+.profile-sub {
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.muted.dot {
+  opacity: 0.55;
+}
+
+.profile-actions {
+  width: min(360px, 100%);
+  justify-self: end;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.avatar-toggle {
+  border: 0;
+  padding: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.avatar-toggle:focus-visible .avatar-wrap {
+  outline: 2px solid var(--c3);
+  outline-offset: 3px;
+}
+
+.avatar-wrap {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid var(--border);
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.avatar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.avatar-form {
+  width: 100%;
+  display: grid;
+  gap: 10px;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transform: translateY(-6px);
+  transition: max-height 220ms ease, opacity 180ms ease, transform 180ms ease;
+}
+
+.avatar-form.open {
+  max-height: 180px;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin: 16px 0;
+}
+
+.grid-2 .glass-panel,
+.full-width {
+  padding: 18px;
+}
+
+.grid-2 h2,
+.full-width h2 {
+  margin: 0 0 14px;
+  font-family: 'Comfortaa', system-ui, sans-serif;
+}
+
+.rejected-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 14px;
+}
+
+#historyList {
+  max-height: 480px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.rejected-card {
+  padding: 14px;
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border);
+}
+
+.badge-rejected {
+  display: inline-block;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  background: rgba(244, 63, 94, 0.18);
+  border: 1px solid rgba(244, 63, 94, 0.28);
+}
+
+.reason {
+  margin-top: 10px;
+}
+
+.small {
+  font-size: 0.9rem;
+}
+
+@media (max-width: 900px) {
+  .profile-top {
+    grid-template-columns: 1fr;
+  }
+
+  .profile-actions {
+    width: 100%;
+    justify-self: start;
+    align-items: flex-start;
+  }
+
+  .grid-2 {
+    grid-template-columns: 1fr;
+  }
+}
