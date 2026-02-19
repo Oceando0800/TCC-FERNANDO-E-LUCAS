@@ -1,0 +1,270 @@
+.admin-map-content {
+  max-width: 1250px;
+}
+
+.admin-map-wrap {
+  padding: 14px;
+}
+
+.map-head h1 {
+  margin: 0;
+  font-size: 1.4rem;
+}
+
+.map-head p {
+  margin: 4px 0 12px;
+  color: var(--muted);
+}
+
+#map {
+  height: calc(100vh - 220px);
+  min-height: 480px;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+
+.map-popup {
+  max-width: 260px;
+  font-family: "Aero Sans", sans-serif;
+}
+
+.map-popup h3 {
+  margin: 0 0 6px;
+  font-size: 1rem;
+  display: block;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.map-popup p {
+  margin: 0 0 6px;
+  font-size: 0.9rem;
+}
+
+.popup-report-img {
+  width: 100%;
+  max-height: 150px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  margin: 6px 0 4px;
+  display: block;
+}
+
+.map-popup-meta {
+  margin-top: 8px;
+  border-top: 1px solid rgba(0,0,0,.15);
+  padding-top: 8px;
+  font-size: 0.85rem;
+}
+
+.map-popup-meta div {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.map-action-btn {
+  margin-top: 10px;
+  border: 1px solid rgba(0,0,0,.18);
+  border-radius: 999px;
+  padding: 7px 10px;
+  background: #45c9b3;
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.82rem;
+  cursor: pointer;
+}
+
+.map-action-btn:hover {
+  background: #2fb39d;
+}
+
+.decision-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(4, 8, 16, 0.55);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 14px;
+  z-index: 2000;
+}
+
+.decision-modal.open {
+  display: flex;
+}
+
+.decision-card {
+  width: min(760px, 100%);
+  padding: 20px;
+  border: 1px solid color-mix(in srgb, var(--c3) 35%, var(--border));
+  box-shadow: 0 20px 34px rgba(6, 10, 20, 0.36);
+}
+
+.decision-card h2 {
+  margin: 0;
+  font-size: 2rem;
+}
+
+.decision-subtitle {
+  margin: 8px 0 14px;
+  color: var(--muted);
+  font-size: 1rem;
+}
+
+.decision-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.decision-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 520px;
+  border-radius: 12px;
+  overflow: hidden;
+  background: color-mix(in srgb, var(--panel) 92%, transparent);
+}
+
+.decision-table th,
+.decision-table td {
+  border-bottom: 1px solid var(--border);
+  padding: 12px;
+  text-align: left;
+}
+
+.decision-table th {
+  font-size: 1.05rem;
+}
+
+.decision-table tbody tr {
+  transition: background 0.16s ease;
+}
+
+.decision-table tbody tr:hover {
+  background: color-mix(in srgb, var(--c3) 12%, transparent);
+}
+
+.decision-table th:last-child,
+.decision-table td:last-child {
+  text-align: center;
+  width: 170px;
+}
+
+.decision-actions {
+  margin-top: 14px;
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}
+
+.decision-cancel-btn {
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 10px 16px;
+  background: rgba(255,255,255,.08);
+  color: var(--text);
+  font-weight: 700;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+.decision-cancel-btn:hover {
+  background: rgba(255,255,255,.14);
+}
+
+.decision-actions .map-action-btn {
+  margin-top: 0;
+  padding: 10px 16px;
+  font-size: 0.95rem;
+}
+
+.decision-choice {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-width: 136px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--c3) 44%, var(--border));
+  background: color-mix(in srgb, var(--panel) 76%, #0f1726 24%);
+  color: var(--text);
+  cursor: pointer;
+  user-select: none;
+  transition: transform 0.14s ease, border-color 0.14s ease, background 0.14s ease, box-shadow 0.14s ease;
+}
+
+.decision-choice:hover {
+  transform: translateY(-1px);
+  border-color: color-mix(in srgb, var(--c3) 70%, var(--border));
+  background: color-mix(in srgb, var(--c3) 20%, var(--panel));
+}
+
+.decision-choice input[type="radio"] {
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  accent-color: var(--c3);
+  cursor: pointer;
+}
+
+.decision-choice span {
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.decision-choice:has(input[type="radio"]:checked) {
+  border-color: color-mix(in srgb, var(--c3) 75%, var(--border));
+  background: color-mix(in srgb, var(--c3) 26%, var(--panel));
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--c3) 22%, transparent);
+}
+
+.status-pin {
+  width: 18px;
+  height: 18px;
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
+  border: 2px solid #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+}
+
+.status-pin.open {
+  background: #f59e0b;
+}
+
+.status-pin.verifying {
+  background: #0ea5e9;
+}
+
+.status-pin.in_progress {
+  background: #2563eb;
+}
+
+.status-pin.resolved {
+  background: #22c55e;
+}
+
+.status-pin.rejected {
+  background: #ef4444;
+}
+
+.pin-wrapper {
+  width: 18px;
+  height: 18px;
+}
+
+@media (max-width: 760px) {
+  .admin-map-wrap {
+    padding: 10px;
+  }
+
+  #map {
+    height: calc(100vh - 200px);
+    min-height: 380px;
+  }
+}

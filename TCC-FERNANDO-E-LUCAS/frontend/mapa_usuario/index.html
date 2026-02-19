@@ -1,0 +1,108 @@
+﻿<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nova Denúncia no Mapa - SCDRI</title>
+
+  <link rel="stylesheet" href="/inicio/style.css" />
+  <link rel="stylesheet" href="./style.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;700&family=Nunito:wght@400;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="frutiger-bg"></div>
+
+  <nav class="glass-nav">
+    <div class="nav-logo" title="Sistema de Controle de Resíduos Industriais">SCDRI</div>
+    <div class="nav-links">
+      <a href="/perfil/" class="nav-avatar" title="Perfil">
+        <img id="navAvatar" class="nav-avatar-img" alt="Perfil" />
+      </a>
+      <a href="/inicio/">Início</a>
+      <a href="/mapa_usuario/" class="active">Mapa</a>
+      <a href="/admin/" id="navAdmin">Admin</a>
+      <a href="#" class="logout" onclick="logout()">Sair</a>
+    </div>
+  </nav>
+
+  <main class="content map-user-content">
+    <section class="glass-panel map-user-layout">
+      <form id="reportForm" class="map-form" novalidate>
+        <div class="form-head">
+          <h1>Nova Denúncia</h1>
+          <p>Clique no mapa para preencher endereço automaticamente.</p>
+        </div>
+
+        <div class="input-group">
+          <label for="title">Título</label>
+          <input type="text" id="title" name="title" maxlength="30" required />
+        </div>
+
+        <div class="input-row two">
+          <div class="input-group">
+            <label for="cep">CEP</label>
+            <input type="text" id="cep" name="cep" placeholder="Ex.: 85810-000" maxlength="50" />
+          </div>
+          <div class="input-group">
+            <label for="number">Número</label>
+            <input type="text" id="number" name="number" placeholder="Ex.: 120" maxlength="50" />
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label for="address">Rua</label>
+          <input type="text" id="address" name="address" maxlength="50" required />
+        </div>
+
+        <div class="input-group">
+          <label for="district">Bairro</label>
+          <input type="text" id="district" name="district" maxlength="50" />
+        </div>
+
+        <div class="input-group">
+          <label for="city">Cidade / UF</label>
+          <input type="text" id="city" name="city" placeholder="Ex.: Cascavel - PR" maxlength="50" required />
+        </div>
+
+        <div class="input-group">
+          <label for="category">Categoria</label>
+          <select id="category" name="category">
+            <option value="entulho">Entulho</option>
+            <option value="domestico">Doméstico</option>
+            <option value="industrial">Industrial</option>
+          </select>
+        </div>
+
+        <div class="input-group">
+          <label for="description">Descrição</label>
+          <textarea id="description" name="description" rows="4" maxlength="100" required></textarea>
+          <small id="descriptionCount" class="input-help">0/100</small>
+        </div>
+
+        <div class="input-group">
+          <label for="image">Imagem (opcional)</label>
+          <input type="file" id="image" name="image" accept="image/*" />
+        </div>
+
+        <p id="selectedInfo" class="selected-info">Nenhum ponto selecionado no mapa.</p>
+
+        <div class="form-actions">
+          <button type="submit" class="glass-button">Enviar Denúncia</button>
+          <button id="clearFormBtn" type="button" class="glass-link-button">Limpar</button>
+        </div>
+      </form>
+
+      <div class="map-column">
+        <div class="map-instructions">Clique no local exato da ocorrência.</div>
+        <div id="map"></div>
+      </div>
+    </section>
+  </main>
+
+  <script src="/theme.js"></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="./script.js" defer></script>
+</body>
+</html>
+
